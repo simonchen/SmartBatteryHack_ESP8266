@@ -1,6 +1,9 @@
 # SmartBastteryHack_ESP8266
 This project is extended from SmartBatteryHack, Now, it works especially for WeMos D1 board that uses ESP8266 chip (ARM architecture).
 
+# Development story
+Initially, I've found the hacking project - SmartBatteryHack being to decrypt the SBS(Smart Battery System), but it was reading /writing data based on AVR architecture (i.e, Ardunio Uno / Mega board), what I have only is the affordable board - WeMos D1 that uses ESP8266 chip at ARM architecture, so I decided to transform the base module for adapting ARM architecture.
+
 # Usage
 After you complied the main Ardunio interface - SmartBatteryHack.ino , then uploading it to WeMos D1 board, the data communication will be controlled by the original GUI program (see below) 
 
@@ -15,7 +18,7 @@ Uses [SBS](https://github.com/simonchen/SBS) instead of SoftI2CMaster (see below
 The pinout of lenovo batteries is always the same: || ||||| being: + + [gap] SCL SDA [unknown] GND GND
 Reference link: (https://forum.thinkpads.com/viewtopic.php?t=77856)
 
-===================================================================================================================================
+**============[BELOW IS THE ORIGINAL README]===========**
 
 # SmartBatteryHack
 This is a hacking tool for smart batteries using SMBus. Originally written for a Dell J1KND battery that uses a [BQ8050](Datasheets/BQ8050_datasheet.pdf) fuel gauge IC.
