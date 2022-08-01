@@ -1,3 +1,8 @@
+# SmartBastteryHack_ESP8266
+This project is extended from SmartBatteryHack, Now, it works especially for WeMos D1 board that uses ESP8266 chip (ARM archetecture).
+After you complied the main Ardunio interface - SmartBatteryHack.ino , then uploading it to WeMos D1 board, the data communication will be controlled by the original GUI program (see below) 
+**Adapting new I2C module new I2C read/write module [SBS](https://github.com/simonchen/SBS) insted of SoftI2CMaster (see below) 
+
 # SmartBatteryHack
 This is a hacking tool for smart batteries using SMBus. Originally written for a Dell J1KND battery that uses a [BQ8050](Datasheets/BQ8050_datasheet.pdf) fuel gauge IC.
 
