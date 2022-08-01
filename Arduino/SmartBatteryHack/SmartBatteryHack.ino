@@ -18,7 +18,7 @@
 
 // Board: Arduino Uno or Arduino Mega
 
-#include <avr/wdt.h>
+//#include <avr/wdt.h>
 
 #if defined (__AVR_ATmega328P__) || defined (__AVR_ATmega328__) // Arduino Uno hardware I2C pins
     #define SDA_PORT PORTC
@@ -34,15 +34,20 @@
 
 #else // for other boards select I2C-pins here
     #define SDA_PORT PORTC
-    #define SDA_PIN 4
+    #define SDA_PIN D14
     #define SCL_PORT PORTC
-    #define SCL_PIN 5
+    #define SCL_PIN D15
 #endif
 
 #define I2C_PULLUP 1 // enable internal pullup resistors for I2C-pins
 #define I2C_SLOWMODE 1 // 25 kHz
 #define I2C_NOINTERRUPT 1 // interrupts may interfere with SMBus operations
-#include <SoftI2CMaster.h> // https://github.com/felias-fogg/SoftI2CMaster
+//#include <SoftI2CMaster.h> // https://github.com/felias-fogg/SoftI2CMaster
+#include <Wire.h>
+#include "SBS.h"
+#define CONSOLE_BAUD 115200
+#define BATTERY_ADDRESS 0x0B // change this address for your battery device 
+SBS battery = SBS(BATTERY_ADDRESS, SDA_PIN, SCL_PIN);
 
 #define ManufacturerAccess          0x00
 #define RemainingCapacityAlarm      0x01
@@ -197,43 +202,47 @@ uint8_t ret[1]; // general array to store arbitrary bytes
 
 uint8_t read_byte(uint8_t reg)
 {
-    i2c_start((sb_address << 1) | I2C_WRITE);
-    i2c_write(reg);
-    i2c_rep_start((sb_address << 1) | I2C_READ);
+    //i2c_start((sb_address << 1) | I2C_WRITE);
+    //i2c_write(reg);
+    //i2c_rep_start((sb_address << 1) | I2C_READ);
 
-    uint8_t ret = i2c_read(true);
+    //uint8_t ret = i2c_read(true);
 
-    i2c_stop();
+    //i2c_stop();
+    uint8_t ret = battery.sbsReadByte(reg);
     return ret;
 }
 
 uint8_t write_byte(uint8_t reg, uint8_t data)
 {
-    i2c_start((sb_address << 1) | I2C_WRITE);
-    i2c_write(reg);
+    //i2c_start((sb_address << 1) | I2C_WRITE);
+    //i2c_write(reg);
 
-    uint8_t ret = i2c_write(data);
+    //uint8_t ret = i2c_write(data);
 
-    i2c_stop();
+    //i2c_stop();
+    uint8_t ret = battery.sbsWriteByte(reg, data);
     return ret; // number of bytes written
 }
 
 uint16_t read_word(uint8_t reg, bool reverse = true)
 {
-    i2c_start((sb_address << 1) | I2C_WRITE);
-    i2c_write(reg);
-    i2c_rep_start((sb_address << 1) | I2C_READ);
+    //i2c_start((sb_address << 1) | I2C_WRITE);
+    //i2c_write(reg);
+    //i2c_rep_start((sb_address << 1) | I2C_READ);
 
-    uint8_t b1 = i2c_read(false);
-    uint8_t b2 = i2c_read(true);
-    i2c_stop();
+    //uint8_t b1 = i2c_read(false);
+    //uint8_t b2 = i2c_read(true);
+    //i2c_stop();
 
-    if (!reverse) return ((b1 << 8) | b2);
-    else return ((b2 << 8) | b1);
+    //if (!reverse) return ((b1 << 8) | b2);
+    //else return ((b2 << 8) | b1);
+    return battery.sbsReadInt(reg, reverse);
 }
 
 uint8_t write_word(uint8_t reg, uint16_t data, bool reverse = true)
 {
+    /*
     i2c_start((sb_address << 1) | I2C_WRITE);
     i2c_write(reg);
 
@@ -249,11 +258,16 @@ uint8_t write_word(uint8_t reg, uint16_t data, bool reverse = true)
     }
 
     i2c_stop();
+    */
+
+    battery.sbsWriteInt(reg, data, reverse);
+
     return 2;
 }
 
 uint8_t read_block(uint8_t reg, uint8_t* block_buffer)
 {
+    /*
     i2c_start((sb_address << 1) | I2C_WRITE);
     i2c_write(reg);
     i2c_rep_start((sb_address << 1) | I2C_READ);
@@ -268,11 +282,16 @@ uint8_t read_block(uint8_t reg, uint8_t* block_buffer)
 
     block_buffer[read_length] = i2c_read(true); // this will nack the last byte and store it in i's num_bytes-1 address.
     i2c_stop();
+    */
+    uint8_t read_length = battery.sbsReadString((char*)&block_buffer[1], reg);
+    block_buffer[0] = read_length;
+
     return (read_length + 1);
 }
 
 uint8_t write_block(uint8_t reg, uint8_t* block_buffer, uint8_t block_buffer_length)
 {
+    /*
     i2c_start((sb_address << 1) | I2C_WRITE);
     i2c_write(reg);
     i2c_write(block_buffer_length);
@@ -284,6 +303,8 @@ uint8_t write_block(uint8_t reg, uint8_t* block_buffer, uint8_t block_buffer_len
 
     i2c_stop();
     return block_buffer_length;
+    */
+    return battery.sbsWriteString(reg, (char*)block_buffer, block_buffer_length);
 }
 
 void scan_smbus_address(void)
@@ -292,17 +313,19 @@ void scan_smbus_address(void)
     
     for (uint8_t i = 3; i < 120; i++)
     {
-        bool ack = i2c_start((i << 1) | I2C_WRITE); 
+        //bool ack = i2c_start((i << 1) | I2C_WRITE); 
+        Wire.beginTransmission(i);
+        bool ack = Wire.endTransmission(true);
 
-        if (ack)
+        if (ack == 0)
         {
-            i2c_stop();
+            //i2c_stop();
             scan_smbus_address_result[scan_smbus_address_result_ptr] = i;
             scan_smbus_address_result_ptr++;
             if (scan_smbus_address_result_ptr > 7) scan_smbus_address_result_ptr = 7;
         }
 
-        i2c_stop();
+        //i2c_stop();
     }
 
     if (scan_smbus_address_result_ptr > 0) send_usb_packet(status, sd_scan_smbus_address, scan_smbus_address_result, scan_smbus_address_result_ptr);
@@ -454,6 +477,8 @@ Purpose:  returns how many bytes exists between the end of the heap and
 **************************************************************************/
 uint16_t free_ram(void)
 {
+    return ESP.getFreeHeap();
+    /*
     extern int  __bss_end; 
     extern int  *__brkval; 
     uint16_t free_memory; 
@@ -467,6 +492,7 @@ uint16_t free_ram(void)
         free_memory = ((int)&free_memory) - ((int)__brkval); 
     }
     return free_memory; 
+    */
 
 } // end of free_ram
 
@@ -926,8 +952,8 @@ void handle_usb_data(void)
 
 void setup()
 {
-    i2c_init();
-    Serial.begin(250000);
+    //i2c_init();
+    Serial.begin(CONSOLE_BAUD);
     wdt_enable(WDTO_4S); // reset program if it hangs for more than 4 seconds
     send_usb_packet(reset, 0x01, ack, 1); // device ready
 }
