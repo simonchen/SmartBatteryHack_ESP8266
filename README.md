@@ -6,6 +6,9 @@ After you complied the main Ardunio interface - SmartBatteryHack.ino , then uplo
 
 Uses [SBS](https://github.com/simonchen/SBS) instead of SoftI2CMaster (see below)
 
+# VSCODE development
+![VSCODE development](https://github.com/simonchen/SmartBatteryHack_ESP8266/blob/master/SmartBatteryHack_ESP8266.png)
+
 # SmartBatteryHack
 This is a hacking tool for smart batteries using SMBus. Originally written for a Dell J1KND battery that uses a [BQ8050](Datasheets/BQ8050_datasheet.pdf) fuel gauge IC.
 
