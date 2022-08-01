@@ -19,6 +19,10 @@ The pinout of lenovo batteries is always the same: || ||||| being: + + [gap] SCL
 
 Reference link: (https://forum.thinkpads.com/viewtopic.php?t=77856)
 
+![Lenovo_battery_sda_scl_gnd.jpg](Lenovo_battery_sda_scl_gnd.jpg)
+
+![Wemos_D1_sda_scl_gnd.jpg](Wemos_D1_sda_scl_gnd.jpg)
+
 
 
 **============[BELOW IS THE ORIGINAL README]===========**
