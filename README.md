@@ -1,5 +1,5 @@
 # SmartBastteryHack_ESP8266
-This project is extended from SmartBatteryHack, Now, it works especially for WeMos D1 board that uses ESP8266 chip (ARM archetecture).
+This project is extended from SmartBatteryHack, Now, it works especially for WeMos D1 board that uses ESP8266 chip (ARM architecture).
 After you complied the main Ardunio interface - SmartBatteryHack.ino , then uploading it to WeMos D1 board, the data communication will be controlled by the original GUI program (see below) 
 
 **Adapting new I2C read/write module**
