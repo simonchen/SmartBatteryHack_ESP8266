@@ -2,7 +2,7 @@
 This project is extended from SmartBatteryHack, Now, it works especially for WeMos D1 board that uses ESP8266 chip (ARM architecture).
 
 # Development story
-Initially, I've found the hacking project - SmartBatteryHack being to decrypt the SBS(Smart Battery System), but it was reading /writing data based on AVR architecture (i.e, Ardunio Uno / Mega board), what I have only is the affordable board - WeMos D1 that uses ESP8266 chip at ARM architecture, so I decided to transform the base module for adapting ARM architecture.
+Initially, I've found the hacking project - SmartBatteryHack to decrypt the SBS(Smart Battery System) data, but it was reading /writing data based on AVR architecture (i.e, Ardunio Uno / Mega board), what I have only is the affordable board - WeMos D1 that uses ESP8266 chip at ARM architecture, so I decided to transform the base module for adapting ARM architecture.
 
 # Usage
 After you complied the main Ardunio interface - SmartBatteryHack.ino , then uploading it to WeMos D1 board, the data communication will be controlled by the original GUI program (see below) 
