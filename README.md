@@ -16,6 +16,7 @@ Uses [SBS](https://github.com/simonchen/SBS) instead of SoftI2CMaster (see below
 
 # Lenovo batteries SDA/SCL pins
 The pinout of lenovo batteries is always the same: || ||||| being: + + [gap] SCL SDA [unknown] GND GND
+
 Reference link: (https://forum.thinkpads.com/viewtopic.php?t=77856)
 
 
