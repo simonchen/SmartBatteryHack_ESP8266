@@ -14,7 +14,7 @@ Uses [SBS](https://github.com/simonchen/SBS) instead of SoftI2CMaster (see below
 # VSCODE development
 ![VSCODE development](https://github.com/simonchen/SmartBatteryHack_ESP8266/blob/master/SmartBatteryHack_ESP8266.png)
 
-# Lenovo batteries SDA/SCL pins
+# Connecting to SDA/SCL pins with Lenovo batteries 
 The pinout of lenovo batteries is always the same: || ||||| being: + + [gap] SCL SDA [unknown] GND GND
 
 Reference link: (https://forum.thinkpads.com/viewtopic.php?t=77856)
