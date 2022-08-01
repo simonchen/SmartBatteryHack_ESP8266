@@ -1,6 +1,8 @@
 /*
  * SmartBatteryHack (https://github.com/laszlodaniel/SmartBatteryHack)
  * Copyright (C) 2021, Daniel Laszlo
+ * Last modified: 2022-7-31 Simon
+ * Adapting for Wemos D1 board only. (ESP8266 chip)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
