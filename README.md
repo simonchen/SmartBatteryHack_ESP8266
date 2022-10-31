@@ -14,8 +14,11 @@ Uses [SBS](https://github.com/simonchen/SBS) instead of SoftI2CMaster (see below
 # VSCODE development
 **Prerequisites**
 You should already configured "Additional boards manager URLs" in Arduino IDE:
+
 http://arduino.esp8266.com/stable/package_esp8266com_index.json
+
 And you installed ESP8266 v2.4.0 in Boards Manager in Arduino IDE
+
 ![VSCODE development](https://github.com/simonchen/SmartBatteryHack_ESP8266/blob/master/SmartBatteryHack_ESP8266.png)
 
 # Connecting to SDA/SCL pins with Lenovo batteries 
