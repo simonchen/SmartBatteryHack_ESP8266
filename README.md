@@ -1,5 +1,5 @@
 # SmartBastteryHack_ESP8266
-This project is extended from SmartBatteryHack, Now, it works especially for WeMos D1 board that uses ESP8266 chip (ARM architecture).
+This project is extended from SmartBatteryHack, Now, it works especially for WeMos D1 R1 board (wifi) that uses ESP8266 chip (ARM architecture).
 
 # Development story
 Initially, I've found the hacking project - SmartBatteryHack to decrypt the SBS(Smart Battery System) data, but it was reading /writing data based on AVR architecture (i.e, Ardunio Uno / Mega board), what I have only is the affordable board - WeMos D1 that uses ESP8266 chip at ARM architecture, so I decided to transform the base module for adapting ARM architecture.
@@ -12,6 +12,10 @@ After you complied the main Ardunio interface - SmartBatteryHack.ino , then uplo
 Uses [SBS](https://github.com/simonchen/SBS) instead of SoftI2CMaster (see below)
 
 # VSCODE development
+**Prerequisites**
+You should already configured "Additional boards manager URLs" in Arduino IDE:
+http://arduino.esp8266.com/stable/package_esp8266com_index.json
+And you installed ESP8266 v2.4.0 in Boards Manager in Arduino IDE
 ![VSCODE development](https://github.com/simonchen/SmartBatteryHack_ESP8266/blob/master/SmartBatteryHack_ESP8266.png)
 
 # Connecting to SDA/SCL pins with Lenovo batteries 
