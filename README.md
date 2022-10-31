@@ -19,7 +19,7 @@ http://arduino.esp8266.com/stable/package_esp8266com_index.json
 ```
 And you installed ESP8266 v2.4.0 in Boards Manager in Arduino IDE
 
-Putting the **SBS** folder in the libararies directory, for example:
+Putting the **Arduino/SBS** folder in the libararies directory, for example:
 ```
 D:\arduino-1.6.5-r5\portable\packages\esp8266\hardware\esp8266\2.4.0\libraries\SBS
 ```
